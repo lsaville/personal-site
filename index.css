@@ -1,65 +1,79 @@
-section.dark {
+.headline {
   background: #222;
-  height: 100%;
-}
-section.dark .gradient1 {
-  color: #fff;
-  display: inline-block;
-  position: relative;
-  color: #fff;
-  background: #000;
-  mix-blend-mode: lighten;
-}
-section.dark .gradient1::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: url('https://images.unsplash.com/photo-1511836536898-6d6f1b8f6948?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
-  pointer-events: none;
-  mix-blend-mode: multiply;
-}
-section.dark .gradient2 {
-  color: #fff;
-  display: inline-block;
-  position: relative;
-  color: #fff;
-  background: #000;
-  mix-blend-mode: lighten;
-}
-section.dark .gradient2::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: radial-gradient(circle, #23966c, #faaa54, #e23b4a, #db0768, #360670);
-  pointer-events: none;
-  mix-blend-mode: multiply;
-}
-/* Page styling, ignore */
-body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-  text-align: center;
-}
-section {
-  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
   font-family: 'Dancing Script', cursive;
+  padding: 3rem 0 0 0;
 }
-.gradient1 {
-  font-size: 20em;
-  margin: 0.5em;
+
+.headline-text {
+  background: #000;
+  color: #fff;
+  font-size: 25vw;
+  margin: 0;
+  mix-blend-mode: lighten;
   opacity: 0.9;
+  position: relative;
 }
+
+.headline-text::before,
+.link::before {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: url('https://images.unsplash.com/photo-1511836536898-6d6f1b8f6948?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
+  bottom: 0;
+  content: '';
+  display: block;
+  left: 0;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 .lee:hover {
   background: tomato;
+}
+
+.links {
+  background: #222;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.link {
+  background: #000;
+  display: block;
+  height: 75px;
+  mix-blend-mode: lighten;
+  padding: 1em 1.5em;
+  position: relative;
+  width: 75px;
+}
+
+.link:hover {
+  transform: translateY(-3px);
+}
+
+.svg {
+  display: block;
+}
+
+.path {
+  fill: #fff;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  text-align: center;
 }
