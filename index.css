@@ -10,7 +10,7 @@
 .headline-text {
   background: #000;
   color: #fff;
-  font-size: 25vw;
+  font-size: 25vmin;
   margin: 0;
   mix-blend-mode: lighten;
   opacity: 0.9;
