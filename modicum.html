@@ -1,0 +1,121 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>A Basic HTML5 Template</title>
+    <meta name="description" content="vidz bb">
+    <meta name="author" content="meowcat">
+
+    <!-- <meta property="og:title" content="A Basic HTML5 Template"> -->
+    <!-- <meta property="og:type" content="website"> -->
+    <!-- <meta property="og:url" content="https://www.sitepoint.com/a-basic-html5-template/"> -->
+    <!-- <meta property="og:description" content="A simple HTML5 Template for new projects."> -->
+    <!-- <meta property="og:image" content="image.png"> -->
+
+    <!-- <link rel="icon" href="/favicon.ico"> -->
+    <!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> -->
+    <!-- <link rel="apple-touch-icon" href="/apple-touch-icon.png"> -->
+
+    <link rel="stylesheet" href="styles.css">
+
+  </head>
+
+  <body>
+    <h1>HTML5 local video file player example</h1>
+    <div id="message"></div>
+    <input type="file" accept="video/*" style="display:block;width:100%;"/>
+    <div id="vid" class="video-container">
+      <video controls autoplay></video>
+    </div>
+    <div id="buttons">
+      <div style="border: 0.25rem solid pink; border-radius: 0.25rem; padding: 1rem;">
+        <h1 style="color:white;">WOW Y WOW</h1>
+        <button id="atras" style="background:#e0e0e0">Inch Atras</button>
+        <button id="normie" style="background:#e0e0e0">Play</button>
+        <button id="forth" style="background:#e0e0e0">Inch Forth</button>
+        <div>
+          <p id="step-display" style="color: white; text-align: center;">0.04</p>
+          <input type="range" id="time-increment" min="0.04" max="10" step="0.04" value="0.04" style="width: 100%;">
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="js/scripts.js"></script> -->
+    <script>
+      (function localFileVideoPlayer() {
+        'use strict'
+        var URL = window.URL || window.webkitURL
+        var displayMessage = function (message, isError) {
+          var element = document.querySelector('#message')
+          element.innerHTML = message
+          element.className = isError ? 'error' : 'info'
+        }
+        var playSelectedFile = function (event) {
+          var file = this.files[0]
+          var type = file.type
+          var videoNode = document.querySelector('video')
+          var canPlay = videoNode.canPlayType(type)
+          if (canPlay === '') canPlay = 'no'
+          var message = 'Can play type "' + type + '": ' + canPlay
+          var isError = canPlay === 'no'
+          displayMessage(message, isError)
+
+          if (isError) {
+            return
+          }
+
+          var fileURL = URL.createObjectURL(file)
+          videoNode.src = fileURL
+        }
+        var inputNode = document.querySelector('input')
+        inputNode.addEventListener('change', playSelectedFile, false)
+
+        var atras = document.getElementById('atras')
+        var normie = document.getElementById('normie')
+        var forth = document.getElementById('forth')
+        var step = document.getElementById('time-increment')
+        var stepDisplay = document.getElementById('step-display')
+
+        var vid = document.getElementsByTagName('video')[0]
+        function inchAtras(e) {
+          e.preventDefault()
+          normie.textContent = 'Play'
+          vid.pause()
+          vid.currentTime = vid.currentTime - stepValue()
+        }
+        function normiePlay(e) {
+          e.preventDefault()
+          let button = e.target
+          if (button.textContent === 'Play') {
+            vid.play()
+            button.textContent = 'Pause'
+          } else {
+            vid.pause()
+            button.textContent = 'Play'
+          }
+        }
+        function inchForth(e) {
+          e.preventDefault()
+          normie.textContent = 'Play'
+          vid.pause()
+          vid.currentTime = vid.currentTime + stepValue()
+        }
+        function displayStep(e) {
+          e.preventDefault()
+          stepDisplay.innerHTML = stepValue()
+        }
+        function stepValue() {
+          return parseFloat(step.value)
+        }
+
+        atras.addEventListener('click', inchAtras)
+        normie.addEventListener('click', normiePlay)
+        forth.addEventListener('click', inchForth)
+        step.addEventListener('change', displayStep)
+      })()
+    </script>
+  </body>
+</html>
